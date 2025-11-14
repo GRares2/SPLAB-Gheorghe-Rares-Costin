@@ -21,7 +21,7 @@ public class Book {
         this.content = new ArrayList<>();
     }
 
-    // Getters and Setters
+    
     public Long getId() {
         return id;
     }
@@ -62,7 +62,7 @@ public class Book {
         this.tableOfContents = tableOfContents;
     }
 
-    // Business methods
+    
     public void addAuthor(Author author) {
         authors.add(author);
     }
@@ -85,4 +85,5 @@ public class Book {
             element.print();
         }
     }
+
 }
