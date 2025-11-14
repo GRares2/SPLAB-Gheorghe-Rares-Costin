@@ -21,7 +21,7 @@ public class RequestLoggingFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        // Log BEFORE processing the request
+        // Log before processing the request
         String timestamp = LocalDateTime.now().format(formatter);
         String method = httpRequest.getMethod();
         String uri = httpRequest.getRequestURI();
@@ -38,10 +38,10 @@ public class RequestLoggingFilter implements Filter {
 
         long startTime = System.currentTimeMillis();
 
-        // Pass the request down the filter chain (to next filter or servlet)
+        // Pass the request down the filter chain 
         chain.doFilter(request, response);
 
-        // Log AFTER processing the request
+        // Log after processing the request
         long duration = System.currentTimeMillis() - startTime;
         String endTimestamp = LocalDateTime.now().format(formatter);
 
@@ -62,4 +62,5 @@ public class RequestLoggingFilter implements Filter {
     public void destroy() {
         System.out.println("RequestLoggingFilter destroyed");
     }
+
 }
