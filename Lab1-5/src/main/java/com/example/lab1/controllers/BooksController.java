@@ -25,7 +25,7 @@ public class BooksController {
         this.commandFactory = new CommandFactory(booksService);
     }
 
-    // GET /books - Get all books
+    // Get all books
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
         Command<List<Book>> command = commandFactory.createGetAllBooksCommand();
@@ -33,7 +33,7 @@ public class BooksController {
         return ResponseEntity.ok(books);
     }
 
-    // GET /books/{id} - Get book by ID
+    // Get book by ID
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Command<Optional<Book>> command = commandFactory.createGetBookByIdCommand(id);
@@ -43,7 +43,7 @@ public class BooksController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST /books - Create new book
+    // Create new book
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Command<Book> command = commandFactory.createCreateBookCommand(book);
@@ -51,7 +51,7 @@ public class BooksController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
     }
 
-    // PUT /books/{id} - Update book
+    //  Update book
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
         Command<Optional<Book>> command = commandFactory.createUpdateBookCommand(id, book);
@@ -61,7 +61,7 @@ public class BooksController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // DELETE /books/{id} - Delete book
+    //  Delete book
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         Command<Boolean> command = commandFactory.createDeleteBookCommand(id);
@@ -73,4 +73,5 @@ public class BooksController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }
