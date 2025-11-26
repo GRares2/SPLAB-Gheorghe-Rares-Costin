@@ -1,0 +1,19 @@
+Titlul: Sistem de management al filmelor
+
+Descriere: Crearea unui API RESTful utilizand Spring Boot pentru a gestiona o baza de date cu o colectie de filme 
+
+Cerinte: API RESTful, baza de date (H2 sau PostgreSQL)
+
+Functionalitatile:Adaugare filme cu detalii, stergerea filmelor , editarea si actualizarea informatiilor despre filme,vizualizarea sau cautarea filmelor dupa criterii specifice, rating la film.
+
+Posibile entitati: Film(id,titlu, anlansare, duratam, rating, rezumat)
+		   Regizor (id, nume, annstere, nationalitate)
+		   Actor (id, nume, annastere, nationalitate)
+		   Tip (id, nume, descriere)
+
+Posibile endpointuri API:
+Doua GET movies diferite una dupa nume alta dupa un {id}
+POST movies pentru crearea de filme
+DELETE pentru stergere filme 
+un GET pentru  cautare dupa genul filmului
+GET pentru regizori cat si CREATE pentru crearea unui regizor nou daca acesta trebuie inregistrat. 
