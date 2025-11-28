@@ -1,0 +1,5 @@
+package com.example.lab1.commands;
+
+public interface Command<T> {
+    T execute();
+}
