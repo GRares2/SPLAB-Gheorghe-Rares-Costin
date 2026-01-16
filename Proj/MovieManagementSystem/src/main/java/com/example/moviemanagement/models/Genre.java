@@ -1,15 +1,13 @@
 package com.example.moviemanagement.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "genres")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,37 +16,8 @@ public class Genre {
     private String name;
     private String description;
 
-    public Genre() {
-    }
-
     public Genre(String name, String description) {
         this.name = name;
         this.description = description;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
-
-

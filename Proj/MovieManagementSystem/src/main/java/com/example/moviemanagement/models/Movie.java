@@ -1,20 +1,14 @@
 package com.example.moviemanagement.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.CascadeType;
+import lombok.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "movies")
+@Data
+@NoArgsConstructor
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +22,7 @@ public class Movie {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "director_id")
-    private com.example.moviemanagement.models.Director director;
+    private Director director;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -36,7 +30,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    private List<com.example.moviemanagement.models.Actor> actors;
+    private List<Actor> actors = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -44,97 +38,21 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private List<com.example.moviemanagement.models.Genre> genres;
+    private List<Genre> genres = new ArrayList<>();
 
-    public Movie() {
+    public Movie(String title, Integer releaseYear, Integer duration) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.duration = duration;
         this.actors = new ArrayList<>();
         this.genres = new ArrayList<>();
     }
 
-    public Movie(String title, Integer releaseYear, Integer duration) {
-        this();
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.duration = duration;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public com.example.moviemanagement.models.Director getDirector() {
-        return director;
-    }
-
-    public void setDirector(com.example.moviemanagement.models.Director director) {
-        this.director = director;
-    }
-
-    public List<com.example.moviemanagement.models.Actor> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<com.example.moviemanagement.models.Actor> actors) {
-        this.actors = actors;
-    }
-
-    public List<com.example.moviemanagement.models.Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<com.example.moviemanagement.models.Genre> genres) {
-        this.genres = genres;
-    }
-
-    public void addActor(com.example.moviemanagement.models.Actor actor) {
+    public void addActor(Actor actor) {
         this.actors.add(actor);
     }
 
-    public void addGenre(com.example.moviemanagement.models.Genre genre) {
+    public void addGenre(Genre genre) {
         this.genres.add(genre);
     }
 }
